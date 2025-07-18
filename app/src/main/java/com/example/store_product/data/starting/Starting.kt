@@ -3,6 +3,9 @@ package com.example.store_product.data.starting
 import android.app.Application
 import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatDelegate
+import com.example.store_product.data.api.IProductService
+import com.example.store_product.data.api.ProductService
+import com.example.store_product.viewmodel.ProductViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -22,11 +25,11 @@ class Starting : Application() {
         }
 
         val serviceModule = module {
-//            single<> {  }
+            single<IProductService> { ProductService() }
         }
 
         val viewModelModule = module {
-//            viewModel { }
+            viewModel {ProductViewModel(get(), get())}
         }
 
         instance = this
